@@ -46,6 +46,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.macTrackBar1 = new XComponent.SliderBar.MACTrackBar();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.media)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -227,6 +228,11 @@
             this.macTrackBar1.TrackLineHeight = 3;
             this.macTrackBar1.TrackLineSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(93)))), ((int)(((byte)(90)))));
             this.macTrackBar1.Value = 0;
+            this.macTrackBar1.ValueChanged += new XComponent.SliderBar.ValueChangedHandler(this.macTrackBar1_ValueChanged_1);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -273,6 +279,7 @@
         private System.Windows.Forms.Button button7;
         private AxWMPLib.AxWindowsMediaPlayer media;
         private System.Windows.Forms.ListBox listBox1;
+        public System.Windows.Forms.PictureBox caratula;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button8;
@@ -281,6 +288,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private XComponent.SliderBar.MACTrackBar macTrackBar1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

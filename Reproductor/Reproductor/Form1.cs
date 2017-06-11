@@ -131,7 +131,7 @@ namespace Reproductor
             {
                 reproduciendo tmp = new reproduciendo();
                 tmp.Nombre = u.Element("Titulo").Value;
-                tmp.Direccion = u.Element("Url").Value;
+                tmp.Direccion = u.Element("Direccion").Value;
                 listareproduciendo.Add(tmp);
 
             }
@@ -147,6 +147,37 @@ namespace Reproductor
 
             macTrackBar1.Value = media.settings.volume;
             actualizar();
+
+        }
+        private void Media_MediaChange(object sender, AxWMPLib._WMPOCXEvents_MediaChangeEvent e)
+        {
+
+
+        }
+
+        private void Media_PlaylistChange(object sender, AxWMPLib._WMPOCXEvents_PlaylistChangeEvent e)
+        {
+
+        }
+
+        private void Media_CdromMediaChange(object sender, AxWMPLib._WMPOCXEvents_CdromMediaChangeEvent e)
+        {
+
+        }
+
+        private void caratula_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void abrirListaFavoritosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
 
         }
         public void elminarlisderepro()
@@ -282,7 +313,7 @@ namespace Reproductor
         {
             if (media.URL == "")
             {
-                if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     media.URL = openFileDialog1.FileName;
                 }
@@ -366,6 +397,11 @@ namespace Reproductor
             media.Ctlcontrols.play();
             listamp3.RemoveRange(0, listamp3.Count);
             tag(media.URL);
+        }
+
+        private void macTrackBar1_ValueChanged_1(object sender, decimal value)
+        {
+            media.settings.volume = macTrackBar1.Value;
         }
     }
 }
