@@ -27,7 +27,8 @@ namespace Reproductor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -73,7 +74,7 @@ namespace Reproductor
         }
         private void Form1_load(object sender, EventArgs e)
         {
-            media.uiMode = "invisible";
+            axWindowsMediaPlayer1.uiMode = "invisible";
             listBox1.Visible = false;
             caratula.Visible = true;
         }
@@ -82,10 +83,10 @@ namespace Reproductor
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                media.URL = openFileDialog1.FileName;
+                axWindowsMediaPlayer1.URL = openFileDialog1.FileName;
             }
             listamp3.RemoveRange(0, listamp3.Count);
-            media.Ctlcontrols.play();
+            axWindowsMediaPlayer1.Ctlcontrols.play();
             tag(openFileDialog1.FileName);
             label1.Text = openFileDialog1.Title;
 
@@ -108,13 +109,13 @@ namespace Reproductor
         public void leerbiblio()
         {
             XDocument documento = XDocument.Load(@"biblio.xml");
-            var listar = from lis in documento.Descendants("Blibioteca") select lis;
+            var listar = from lis in documento.Descendants("Biblio") select lis;
             foreach (XElement u in listar.Elements("Cancion"))
             {
                 biblio tmp = new biblio();
                 tmp.Nombre = u.Element("Nombre").Value;
-                tmp.Direccion = u.Element("Direccîón").Value;
-                tmp.Numero = u.Element("No").Value;
+                tmp.Direccion = u.Element("Direccion").Value;
+                tmp.Numero = u.Element("Numero").Value;
                 tmp.Album = u.Element("Album").Value;
                 tmp.Tiempo = u.Element("Tiempo").Value;
                 tmp.Condicion = u.Element("Calidad").Value;
@@ -130,7 +131,7 @@ namespace Reproductor
             foreach (XElement u in listar.Elements("Cancion"))
             {
                 reproduciendo tmp = new reproduciendo();
-                tmp.Nombre = u.Element("Titulo").Value;
+                tmp.Nombre = u.Element("Nombrecancion").Value;
                 tmp.Direccion = u.Element("Direccion").Value;
                 listareproduciendo.Add(tmp);
 
@@ -139,29 +140,14 @@ namespace Reproductor
         private void macTrackBar1_ValueChanged(object sender, decimal value)
         {
 
-            media.settings.volume = macTrackBar1.Value;
+            axWindowsMediaPlayer1.settings.volume = macTrackBar1.Value;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
 
-            macTrackBar1.Value = media.settings.volume;
+            macTrackBar1.Value = axWindowsMediaPlayer1.settings.volume;
             actualizar();
-
-        }
-        private void Media_MediaChange(object sender, AxWMPLib._WMPOCXEvents_MediaChangeEvent e)
-        {
-
-
-        }
-
-        private void Media_PlaylistChange(object sender, AxWMPLib._WMPOCXEvents_PlaylistChangeEvent e)
-        {
-
-        }
-
-        private void Media_CdromMediaChange(object sender, AxWMPLib._WMPOCXEvents_CdromMediaChangeEvent e)
-        {
 
         }
 
@@ -227,14 +213,14 @@ namespace Reproductor
         {
             listareproduciendo.RemoveRange(0, listareproduciendo.Count);
             actualizar();
-            var myPlayList = media.playlistCollection.newPlaylist("MyPlayList");
+            var myPlayList = axWindowsMediaPlayer1.playlistCollection.newPlaylist("MyPlayList");
 
             for (int i = 0; i < listareproduciendo.Count; i++)
             {
-                var mediaItem = media.newMedia(listareproduciendo[i].Direccion);
+                var mediaItem = axWindowsMediaPlayer1.newMedia(listareproduciendo[i].Direccion);
                 myPlayList.appendItem(mediaItem);
             }
-            media.currentPlaylist = myPlayList;
+            axWindowsMediaPlayer1.currentPlaylist = myPlayList;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -273,8 +259,9 @@ namespace Reproductor
 
         private void button7_Click(object sender, EventArgs e)
         {
+
             //this.Hide(); //cerrar formulario actual
-            media.Ctlcontrols.stop();
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
             this.Hide();
             listaderepro frm = new listaderepro();
             frm.Hide();
@@ -292,13 +279,13 @@ namespace Reproductor
                 {
                     if (i == 0)
                     {
-                        media.URL = listareproduciendo[max - 1].Direccion;
+                        axWindowsMediaPlayer1.URL = listareproduciendo[max - 1].Direccion;
                         label1.Text = listareproduciendo[max - 1].Nombre;
                         break;
                     }
                     else
                     {
-                        media.URL = listareproduciendo[i - 1].Direccion;
+                        axWindowsMediaPlayer1.URL = listareproduciendo[i - 1].Direccion;
                         label1.Text = listareproduciendo[i - 1].Nombre;
                         break;
                     }
@@ -306,39 +293,24 @@ namespace Reproductor
                 }
             }
             listamp3.RemoveRange(0, listamp3.Count);
-            tag(media.URL);
+            tag(axWindowsMediaPlayer1.URL);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (media.URL == "")
-            {
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    media.URL = openFileDialog1.FileName;
-                }
 
-                media.Ctlcontrols.play();
-                tag(openFileDialog1.FileName);
-                label1.Text = openFileDialog1.Title;
-
-
-            }
-
-
-            else {
-                media.Ctlcontrols.play();
-            }
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+            
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            media.Ctlcontrols.pause();
+            axWindowsMediaPlayer1.Ctlcontrols.pause();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            media.Ctlcontrols.stop();
+            axWindowsMediaPlayer1.Ctlcontrols.stop();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -354,13 +326,13 @@ namespace Reproductor
                     {
                         if (i == max2 - 1)
                         {
-                            media.URL = listabiblio[0].Direccion;
+                            axWindowsMediaPlayer1.URL = listabiblio[0].Direccion;
                             label1.Text = listabiblio[0].Nombre;
                             break;
                         }
                         else
                         {
-                            media.URL = listabiblio[i + 1].Direccion;
+                            axWindowsMediaPlayer1.URL = listabiblio[i + 1].Direccion;
                             label1.Text = listabiblio[i + 1].Nombre;
                             break;
                         }
@@ -379,13 +351,13 @@ namespace Reproductor
                     {
                         if (i == max - 1)
                         {
-                            media.URL = listareproduciendo[0].Direccion;
+                            axWindowsMediaPlayer1.URL = listareproduciendo[0].Direccion;
                             label1.Text = listareproduciendo[0].Nombre;
                             break;
                         }
                         else
                         {
-                            media.URL = listareproduciendo[i + 1].Direccion;
+                            axWindowsMediaPlayer1.URL = listareproduciendo[i + 1].Direccion;
                             label1.Text = listareproduciendo[i + 1].Nombre;
                             break;
                         }
@@ -394,14 +366,34 @@ namespace Reproductor
                 }
 
             }
-            media.Ctlcontrols.play();
+            axWindowsMediaPlayer1.Ctlcontrols.play();
             listamp3.RemoveRange(0, listamp3.Count);
-            tag(media.URL);
+            tag(axWindowsMediaPlayer1.URL);
         }
 
         private void macTrackBar1_ValueChanged_1(object sender, decimal value)
         {
-            media.settings.volume = macTrackBar1.Value;
+            axWindowsMediaPlayer1.settings.volume = macTrackBar1.Value;
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

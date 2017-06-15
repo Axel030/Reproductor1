@@ -34,12 +34,13 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -51,6 +52,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(339, 266);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick_1);
             // 
             // button1
             // 
@@ -102,41 +105,34 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 302);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Nombre";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(507, 70);
+            this.button6.Location = new System.Drawing.Point(496, 70);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(104, 23);
+            this.button6.Size = new System.Drawing.Size(115, 23);
             this.button6.TabIndex = 7;
             this.button6.Text = "Abrir Biblioteca";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(507, 102);
+            this.button7.Location = new System.Drawing.Point(496, 102);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(104, 23);
+            this.button7.Size = new System.Drawing.Size(115, 23);
             this.button7.TabIndex = 8;
-            this.button7.Text = "Agregar Biblioteca";
+            this.button7.Text = "Agregar a Biblioteca";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(147, 51);
+            this.dataGridView2.Location = new System.Drawing.Point(151, 49);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(343, 255);
             this.dataGridView2.TabIndex = 9;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // folderBrowserDialog1
             // 
@@ -146,11 +142,32 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 324);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Nombre";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(498, 104);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(103, 22);
+            this.button8.TabIndex = 10;
+            this.button8.Text = "Agregar cancion";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // listaderepro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(620, 346);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -163,6 +180,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "listaderepro";
             this.Text = "listaderepro";
+            this.Load += new System.EventHandler(this.listaderepro_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
@@ -171,18 +189,18 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        public System.Windows.Forms.DataGridView dataGridView2;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button8;
     }
 }

@@ -29,48 +29,39 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.minimizar = new System.Windows.Forms.Button();
-            this.cerrar = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.macTrackBar1 = new XComponent.SliderBar.MACTrackBar();
             this.button7 = new System.Windows.Forms.Button();
-            this.media = new AxWMPLib.AxWindowsMediaPlayer();
+            this.button5 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.macTrackBar1 = new XComponent.SliderBar.MACTrackBar();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.media)).BeginInit();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
-            // minimizar
+            // openFileDialog1
             // 
-            this.minimizar.Location = new System.Drawing.Point(501, 12);
-            this.minimizar.Name = "minimizar";
-            this.minimizar.Size = new System.Drawing.Size(92, 23);
-            this.minimizar.TabIndex = 0;
-            this.minimizar.Text = "minimizar";
-            this.minimizar.UseVisualStyleBackColor = true;
-            this.minimizar.Click += new System.EventHandler(this.minimizar_Click);
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // cerrar
+            // label1
             // 
-            this.cerrar.BackColor = System.Drawing.SystemColors.Control;
-            this.cerrar.Location = new System.Drawing.Point(599, 12);
-            this.cerrar.Name = "cerrar";
-            this.cerrar.Size = new System.Drawing.Size(85, 22);
-            this.cerrar.TabIndex = 1;
-            this.cerrar.Text = "cerrar";
-            this.cerrar.UseVisualStyleBackColor = false;
-            this.cerrar.Click += new System.EventHandler(this.cerrar_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(51, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Nombre de la cancion";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button3
             // 
@@ -92,25 +83,28 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // macTrackBar1
             // 
-            this.button5.Location = new System.Drawing.Point(356, 134);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(113, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Agregar a Favoritos";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(499, 134);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(92, 23);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Letra";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.macTrackBar1.BackColor = System.Drawing.Color.Transparent;
+            this.macTrackBar1.BorderColor = System.Drawing.SystemColors.ActiveBorder;
+            this.macTrackBar1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.macTrackBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(125)))), ((int)(((byte)(123)))));
+            this.macTrackBar1.IndentHeight = 6;
+            this.macTrackBar1.Location = new System.Drawing.Point(373, 224);
+            this.macTrackBar1.Maximum = 10;
+            this.macTrackBar1.Minimum = 0;
+            this.macTrackBar1.Name = "macTrackBar1";
+            this.macTrackBar1.Size = new System.Drawing.Size(328, 47);
+            this.macTrackBar1.TabIndex = 16;
+            this.macTrackBar1.TickColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(146)))), ((int)(((byte)(148)))));
+            this.macTrackBar1.TickHeight = 4;
+            this.macTrackBar1.TrackerColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(130)))), ((int)(((byte)(198)))));
+            this.macTrackBar1.TrackerSize = new System.Drawing.Size(16, 16);
+            this.macTrackBar1.TrackLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(93)))), ((int)(((byte)(90)))));
+            this.macTrackBar1.TrackLineHeight = 3;
+            this.macTrackBar1.TrackLineSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(93)))), ((int)(((byte)(90)))));
+            this.macTrackBar1.Value = 0;
+            this.macTrackBar1.ValueChanged += new XComponent.SliderBar.ValueChangedHandler(this.macTrackBar1_ValueChanged_1);
             // 
             // button7
             // 
@@ -122,14 +116,15 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // media
+            // button5
             // 
-            this.media.Enabled = true;
-            this.media.Location = new System.Drawing.Point(703, 2);
-            this.media.Name = "media";
-            this.media.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("media.OcxState")));
-            this.media.Size = new System.Drawing.Size(10, 10);
-            this.media.TabIndex = 7;
+            this.button5.Location = new System.Drawing.Point(356, 134);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(113, 23);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Agregar a Favoritos";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // listBox1
             // 
@@ -189,57 +184,41 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // label1
+            // button6
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Nombre de la cancion";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.button6.Location = new System.Drawing.Point(499, 134);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(92, 23);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "Letra";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(26, 333);
+            this.dataGridView1.Location = new System.Drawing.Point(26, 318);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(641, 47);
+            this.dataGridView1.Size = new System.Drawing.Size(641, 70);
             this.dataGridView1.TabIndex = 15;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
-            // macTrackBar1
+            // axWindowsMediaPlayer1
             // 
-            this.macTrackBar1.BackColor = System.Drawing.Color.Transparent;
-            this.macTrackBar1.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.macTrackBar1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.macTrackBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(125)))), ((int)(((byte)(123)))));
-            this.macTrackBar1.IndentHeight = 6;
-            this.macTrackBar1.Location = new System.Drawing.Point(373, 224);
-            this.macTrackBar1.Maximum = 10;
-            this.macTrackBar1.Minimum = 0;
-            this.macTrackBar1.Name = "macTrackBar1";
-            this.macTrackBar1.Size = new System.Drawing.Size(328, 47);
-            this.macTrackBar1.TabIndex = 16;
-            this.macTrackBar1.TickColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(146)))), ((int)(((byte)(148)))));
-            this.macTrackBar1.TickHeight = 4;
-            this.macTrackBar1.TrackerColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(130)))), ((int)(((byte)(198)))));
-            this.macTrackBar1.TrackerSize = new System.Drawing.Size(16, 16);
-            this.macTrackBar1.TrackLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(93)))), ((int)(((byte)(90)))));
-            this.macTrackBar1.TrackLineHeight = 3;
-            this.macTrackBar1.TrackLineSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(93)))), ((int)(((byte)(90)))));
-            this.macTrackBar1.Value = 0;
-            this.macTrackBar1.ValueChanged += new XComponent.SliderBar.ValueChangedHandler(this.macTrackBar1_ValueChanged_1);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(744, 31);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(10, 10);
+            this.axWindowsMediaPlayer1.TabIndex = 17;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(699, 392);
+            this.ClientSize = new System.Drawing.Size(760, 392);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.macTrackBar1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
@@ -249,20 +228,17 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.media);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.cerrar);
-            this.Controls.Add(this.minimizar);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Reproductor";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.media)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,23 +248,24 @@
 
         private System.Windows.Forms.Button minimizar;
         private System.Windows.Forms.Button cerrar;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private AxWMPLib.AxWindowsMediaPlayer media;
-        private System.Windows.Forms.ListBox listBox1;
         public System.Windows.Forms.PictureBox caratula;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private XComponent.SliderBar.MACTrackBar macTrackBar1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        public AxWMPLib.AxWindowsMediaPlayer Media;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button7;
+        private XComponent.SliderBar.MACTrackBar macTrackBar1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Label label1;
+        public AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }
 

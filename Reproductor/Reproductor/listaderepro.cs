@@ -50,7 +50,7 @@ namespace Reproductor
             XmlElement cancion = doc.CreateElement("Cancion");
 
 
-            XmlElement titulo = doc.CreateElement("Titulo");
+            XmlElement titulo = doc.CreateElement("Nombrecancion");
 
 
             XmlElement url = doc.CreateElement("Url");
@@ -61,7 +61,7 @@ namespace Reproductor
                 cancion = doc.CreateElement("Cancion");
                 raiz.AppendChild(cancion);
 
-                titulo = doc.CreateElement("Titulo");
+                titulo = doc.CreateElement("Nombrecancion");
                 titulo.AppendChild(doc.CreateTextNode(listareproduciendo[i].Nombre));
                 cancion.AppendChild(titulo);
 
@@ -92,19 +92,19 @@ namespace Reproductor
                         Writer.Indentation = 5;
 
                         //Escribimos el nodo principal.
-                        Writer.WriteStartElement("Blibioteca");
+                        Writer.WriteStartElement("Biblio");
 
                         //Escribimos un nodo empleado.
                         Writer.WriteStartElement("Cancion");
 
                         //Escribimos cada uno de los elementos del nodo empleado.
                         Writer.WriteElementString("nombre", listabiblio[i].Nombre);
-                        Writer.WriteElementString("url", listabiblio[i].Direccion);
-                        Writer.WriteElementString("num", listabiblio[i].Numero);
+                        Writer.WriteElementString("direccion", listabiblio[i].Direccion);
+                        Writer.WriteElementString("nummero", listabiblio[i].Numero);
                         Writer.WriteElementString("album", listabiblio[i].Album);
                         //Escribimos el subnodo teléfono.
-                        Writer.WriteElementString("duracion", listabiblio[i].Tiempo);
-                        Writer.WriteElementString("calidad", listabiblio[i].Condicion);
+                        Writer.WriteElementString("tiempo", listabiblio[i].Tiempo);
+                        Writer.WriteElementString("condicion", listabiblio[i].Condicion);
 
                         //Cerramos el nodo y el documento.
                         Writer.WriteEndElement();
@@ -119,7 +119,7 @@ namespace Reproductor
             dataGridView1.DataSource = null;
             dataGridView1.Refresh();
             dataGridView1.DataSource = listareproduciendo;
-            dataGridView1.Columns["url"].Visible = false;
+            dataGridView1.Columns["direccion"].Visible = false;
             dataGridView1.Refresh();
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -151,29 +151,7 @@ namespace Reproductor
         
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //    frm.Hide();
-            //    frm.label1.Text = " ";
-
-            //    frm.label1.Text = dataGridView1.CurrentRow.Cells["nombre"].Value.ToString();
-            //    frm.Media.url = dataGridView1.CurrentRow.Cells["url"].Value.ToString();
-
-            //    WMPLib.IWMPPlaylist playlist = frm.media.playlistCollection.newPlaylist("myplaylist");
-            //    WMPLib.IWMPMedia media;
-
-            //    media = frm.Media.newMedia(dataGridView1.CurrentRow.Cells["url"].Value.ToString());
-            //    playlist.appendItem(media);
-
-            //    frm.Media.currentPlaylist = playlist;
-            //    listamp3.RemoveRange(0, listamp3.Count);
-            //    string dat = dataGridView1.CurrentRow.Cells["url"].Value.ToString();
-            //    cargarima(dat);
-            //    tagcan(dat);
-            //    frm.dataGridView1.DataSource = null;
-            //    frm.dataGridView1.Refresh();
-            //    frm.dataGridView1.DataSource = listamp3;
-            //    frm.dataGridView1.Refresh();
-            //    frm.Show();
-
+          
         }
 
 
@@ -220,6 +198,7 @@ namespace Reproductor
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
             openFileDialog1.ShowDialog();
             reproduciendo reprotemp = new reproduciendo();
             reprotemp.Direccion = openFileDialog1.FileName;
@@ -236,14 +215,22 @@ namespace Reproductor
         string nombre1, url, num, album, dura, cali;
         private void button4_Click(object sender, EventArgs e)
         {
+            string nomb = label1.Text;
+            for (int i = 0; i < listabiblio.Count; i++)
+            {
+                if (nomb == listabiblio[i].Nombre)
+                {
+                    listabiblio.RemoveAt(i);
+                }
+            }
+
+            ModificarDatosXml(nomb);
             listabiblio.RemoveRange(0, listabiblio.Count);
-            string nom = label1.Text;
-            ModificarDatosXml(nom);
             leerbiblio();
-            dataGridView1.DataSource = null;
-            dataGridView1.Refresh();
-            dataGridView1.DataSource = listabiblio;
-            dataGridView1.Refresh();
+            dataGridView2.DataSource = null;
+            dataGridView2.Refresh();
+            dataGridView2.DataSource = listabiblio;
+            dataGridView2.Refresh();
         }
         public void eliminarlisre()
         {
@@ -291,40 +278,177 @@ namespace Reproductor
             foreach (XElement u in listar.Elements("Cancion"))
             {
                 reproduciendo tmp = new reproduciendo();
-                tmp.Nombre = u.Element("Titulo").Value;
-                tmp.Direccion = u.Element("Url").Value;
+                tmp.Nombre = u.Element("Nombrecancion").Value;
+                tmp.Direccion = u.Element("Direccion").Value;
                 listareproduciendo.Add(tmp);
 
             }
         }
         private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //frm.Hide();
-            //frm.label1.Text = " ";
+            frm.Hide();
+            frm.label1.Text = " ";
 
-            //frm.label1.Text = dataGridView2.CurrentRow.Cells["Nombre"].Value.ToString();
-            //frm.Media.URL = dataGridView2.CurrentRow.Cells["Url"].Value.ToString();
+            frm.label1.Text = dataGridView2.CurrentRow.Cells["Nombre"].Value.ToString();
+            frm.axWindowsMediaPlayer1.URL = dataGridView2.CurrentRow.Cells["Direccion"].Value.ToString();
 
-            //WMPLib.IWMPPlaylist playlist = frm.Media.playlistCollection.newPlaylist("myplaylist");
-            //WMPLib.IWMPMedia media;
+            WMPLib.IWMPPlaylist playlist = frm.axWindowsMediaPlayer1.playlistCollection.newPlaylist("myplaylist");
+            WMPLib.IWMPMedia media;
 
-            //media = frm.Media.newMedia(dataGridView2.CurrentRow.Cells["Url"].Value.ToString());
-            //playlist.appendItem(media);
+            media = frm.axWindowsMediaPlayer1.newMedia(dataGridView2.CurrentRow.Cells["Direccion"].Value.ToString());
+            playlist.appendItem(media);
 
-            //frm.Media.currentPlaylist = playlist;
-            //listadatosmp3.RemoveRange(0, listadatosmp3.Count);
-            //string dat = dataGridView2.CurrentRow.Cells["Url"].Value.ToString();
-            //cargarima(dat);
-            //tagcan(dat);
-            //frm.dataGridView1.DataSource = null;
-            //frm.dataGridView1.Refresh();
-            //frm.dataGridView1.DataSource = listadatosmp3;
-            //frm.dataGridView1.Refresh();
-            //frm.Show();
+            frm.axWindowsMediaPlayer1.currentPlaylist = playlist;
+            listamp3.RemoveRange(0, listamp3.Count);
+            string dat = dataGridView2.CurrentRow.Cells["Direccion"].Value.ToString();
+            cargarima(dat);
+            tagcan(dat);
+            frm.dataGridView1.DataSource = null;
+            frm.dataGridView1.Refresh();
+            frm.dataGridView1.DataSource = listamp3;
+            frm.dataGridView1.Refresh();
+            frm.Show();
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void listaderepro_Load(object sender, EventArgs e)
+        {
+            dataGridView2.Visible = false;
+            button4.Visible = false;
+            button8.Visible = false;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            button8.Visible = true;
+            button7.Visible = false;
+            dataGridView1.Visible = false;
+            dataGridView2.Visible = true;
+            listareproduciendo.RemoveRange(0, listareproduciendo.Count);
+            actualizar();
+            eliminarlisre();
+            listabiblio.RemoveRange(0, listabiblio.Count);
+            listareproduciendo.RemoveRange(0, listareproduciendo.Count);
+
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = true;
+            leerbiblio();
+            dataGridView2.DataSource = null;
+            dataGridView2.Refresh();
+            dataGridView2.DataSource = listabiblio;
+            dataGridView2.Refresh();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string nomb = label1.Text;
+            for (int i = 0; i < listareproduciendo.Count; i++)
+            {
+                biblio blitmp = new biblio();
+                if (nomb == listareproduciendo[i].Nombre)
+                {
+                    blitmp.Direccion = listareproduciendo[i].Direccion;
+                    blitmp.Nombre = listareproduciendo[i].Nombre;
+                    TagLib.File file = TagLib.File.Create(listareproduciendo[i].Direccion);
+                    blitmp.Nombrecancion = file.Tag.Title;
+                    blitmp.Año = Convert.ToString(file.Tag.Year);
+                    blitmp.Tiempo = file.Properties.Duration.ToString();
+                    blitmp.Numero = Convert.ToString(file.Tag.Track);
+                    blitmp.Album = file.Tag.Album;
+                    blitmp.Condicion = Convert.ToString(file.Properties.AudioBitrate);
+
+                }
+                listabiblio.Add(blitmp);
+            }
+            string archivo = @"biblio.xml";
+            if (File.Exists(archivo) == true)
+            {
+                InsertarXml();
+            }
+            else { EscribirXml(); }
+        }
+        string urla;
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                urla = openFileDialog1.FileName;
+            }
+            listamp3.RemoveRange(0, listamp3.Count);
+
+
+
+            biblio blitmp = new biblio();
+            TagLib.File file = TagLib.File.Create(urla);
+            blitmp.Direccion = urla;
+            blitmp.Nombre = file.Tag.Title;
+            blitmp.Nombrecancion = file.Tag.Title;
+            label1.Text = file.Tag.Title;
+            blitmp.Año = Convert.ToString(file.Tag.Year);
+            blitmp.Tiempo = file.Properties.Duration.ToString();
+            blitmp.Numero = Convert.ToString(file.Tag.Track);
+            blitmp.Album = file.Tag.Album;
+            blitmp.Condicion = Convert.ToString(file.Properties.AudioBitrate);
+
+            listabiblio.Add(blitmp);
+
+            string archivo = @"biblio.xml";
+            if (File.Exists(archivo) == true)
+            {
+                InsertarXml();
+            }
+            else { EscribirXml(); }
+            listabiblio.RemoveRange(0, listabiblio.Count);
+            leerbiblio();
+            dataGridView2.DataSource = null;
+            dataGridView2.Refresh();
+            dataGridView2.DataSource = listabiblio;
+            dataGridView2.Columns["Url"].Visible = false;
+            dataGridView2.Refresh();
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            string nom = dataGridView1.CurrentRow.Cells["nombre"].Value.ToString();
+            label1.Text = nom;
+        }
+
+        private void dataGridView1_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            frm.Hide();
+            frm.label1.Text = " ";
+
+            frm.label1.Text = dataGridView1.CurrentRow.Cells["nombre"].Value.ToString();
+            frm.axWindowsMediaPlayer1.URL = dataGridView1.CurrentRow.Cells["direccion"].Value.ToString();
+
+            WMPLib.IWMPPlaylist playlist = frm.axWindowsMediaPlayer1.playlistCollection.newPlaylist("myplaylist");
+            WMPLib.IWMPMedia media;
+
+            media = frm.axWindowsMediaPlayer1.newMedia(dataGridView1.CurrentRow.Cells["direccion"].Value.ToString());
+            playlist.appendItem(media);
+
+            frm.axWindowsMediaPlayer1.currentPlaylist = playlist;
+            listamp3.RemoveRange(0, listamp3.Count);
+            string dat = dataGridView1.CurrentRow.Cells["direccion"].Value.ToString();
+            cargarima(dat);
+            tagcan(dat);
+            frm.dataGridView1.DataSource = null;
+            frm.dataGridView1.Refresh();
+            frm.dataGridView1.DataSource = listamp3;
+            frm.dataGridView1.Refresh();
+            frm.Show();
 
         }
 
@@ -335,16 +459,16 @@ namespace Reproductor
         public void leerbiblio()
         {
             XDocument documento = XDocument.Load(@"biblio.xml");
-            var listar = from lis in documento.Descendants("Blibioteca") select lis;
+            var listar = from lis in documento.Descendants("Biblio") select lis;
             foreach (XElement u in listar.Elements("Cancion"))
             {
                 biblio tmp = new biblio();
-                tmp.Nombre = u.Element("Titulo").Value;
-                tmp.Direccion = u.Element("Url").Value;
-                tmp.Numero = u.Element("No").Value;
+                tmp.Nombre = u.Element("Nombrecancion").Value;
+                tmp.Direccion = u.Element("Direccion").Value;
+                tmp.Numero = u.Element("Numero").Value;
                 tmp.Album = u.Element("Album").Value;
-                tmp.Tiempo = u.Element("Duracion").Value;
-                tmp.Condicion = u.Element("Calidad").Value;
+                tmp.Tiempo = u.Element("Tiempo").Value;
+                tmp.Condicion = u.Element("Condicion").Value;
 
                 listabiblio.Add(tmp);
 
@@ -387,17 +511,17 @@ namespace Reproductor
             XmlElement Cancion = documento.CreateElement("Cancion");
 
             //Creamos el elemento idEmpleado.
-            XmlElement nombre = documento.CreateElement("Titulo");
+            XmlElement nombre = documento.CreateElement("Nombrecancion");
             nombre.InnerText = nom1;
             Cancion.AppendChild(nombre);
 
             //Creamos el elemento nombre.
-            XmlElement Url = documento.CreateElement("Url");
+            XmlElement Url = documento.CreateElement("Direccion");
             Url.InnerText = url1;
             Cancion.AppendChild(Url);
 
             //Creamos el elemento apellidos.
-            XmlElement num = documento.CreateElement("No");
+            XmlElement num = documento.CreateElement("Numero");
             num.InnerText = num1;
             Cancion.AppendChild(num);
 
@@ -407,11 +531,11 @@ namespace Reproductor
             Cancion.AppendChild(album);
 
             //Creamos el elemento fijo.
-            XmlElement duracion = documento.CreateElement("Duracion");
+            XmlElement duracion = documento.CreateElement("Tiempo");
             duracion.InnerText = dura1;
             Cancion.AppendChild(duracion);
             //Creamos el elemento movil.
-            XmlElement calidad = documento.CreateElement("Calidad");
+            XmlElement calidad = documento.CreateElement("Condicion");
             calidad.InnerText = cali1;
             Cancion.AppendChild(calidad);
 
@@ -426,7 +550,7 @@ namespace Reproductor
             XmlElement bibliot = documento.DocumentElement;
 
             //Obtenemos la lista de todos los empleados.
-            XmlNodeList listacancion = documento.SelectNodes("Blibioteca/Cancion");
+            XmlNodeList listacancion = documento.SelectNodes("Biblio/Nombrecancion");
 
             foreach (XmlNode item in listacancion)
             {
